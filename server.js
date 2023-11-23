@@ -1,5 +1,4 @@
 const express = require('express');
-const morgan = require('morgan');
 const app = express();
 // Importamos los enrutadores
 const rutasTareas_view = require('./routes/list-view-router')
@@ -33,7 +32,6 @@ function middleware(req, res, next) {
 }
 //Registramos el Middleware
 app.use(middleware);
-app.use(morgan('combined'));
 
 // Usamos el array de tareas almacenado en el middleware
 app.use(express.json());

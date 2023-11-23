@@ -5,8 +5,7 @@ const router = Router();
 
 //1- Hacer una solicitud GET a una ruta específica para listar las todas tareas.
 router.get('/list', (req, res) => {
-    const listaTareas = req.listaTareas;
-    res.json(listaTareas)
+    res.json(req.listaTareas)
 })
 
 //2- Hacer una solicitud GET a una ruta específica para ver una tarea en especifico.
