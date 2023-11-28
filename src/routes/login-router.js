@@ -50,5 +50,4 @@ router.get('/medium-clients', JWTValidation, (req, res) => {
     }
 })
 
-
 module.exports = router;
