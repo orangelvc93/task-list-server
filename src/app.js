@@ -1,9 +1,16 @@
 const express = require('express');
 const app = express();
 const morgan = require('morgan');
+const jwt = require('jsonwebtoken');
+const dotenv = require('dotenv');
+
+
+
 
 //CONFIGURACIONES
-app.set("PORT", 3000);
+dotenv.config();
+const PORT = process.env.PORT || 3000;
+app.set("PORT", PORT);
 // Definimos los métodos HTTP válidos
 const metodosValidos = ['GET', 'POST', 'PUT', 'DELETE'];
 
@@ -24,15 +31,16 @@ app.use(morgan("dev"));
 app.use(validarMetodoHttp);
 
 
-
 //ROUTES
 const rutasTareas_edit = require('./routes/list-edit-router');
 const rutasTareas_view = require('./routes/list-view-router');
+const login_router = require('./routes/login-router');
 
 //AGREGAMOS MÓDULOS A EXPRESS
 app.use(express.json())
 app.use('/', rutasTareas_edit);
 app.use('/', rutasTareas_view);
+app.use('/', login_router);
 
 
 //EXPORTAMOS MÓDULOS

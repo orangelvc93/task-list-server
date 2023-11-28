@@ -1,6 +1,9 @@
 const fs = require('fs');
 const { listaTareas } = require('../controllers/controladores');
+const jwt = require('jsonwebtoken');
+const dotenv = require('dotenv');
 
+dotenv.config();
 
 //Valida que los campos ID y DESCRIPTION no estén vacíos.
 const validarCampos = (req, res, next) => {
@@ -40,6 +43,23 @@ const validaIndex = (req, res, next) => {
 };
 
 
+//Validar JWT 
+const JWTValidation = (req, res, next) => {
+    const secretKey = process.env.SECRET_KEY; //definimos la llave secreta en una variable 
+    const token = req.headers.authorization;
+    if (token) {
+        try {
+            const user = jwt.verify(token, secretKey);
+            const { rol } = user;
+            req.rol = rol;
+            next()
+        } catch (error) {
+            res.json({ error: "El token no es válido." })
+        }
+    }
+};
 
-module.exports = { validarCampos, validarDuplicados, validaIndex }
+
+
+module.exports = { validarCampos, validarDuplicados, validaIndex, JWTValidation }
 

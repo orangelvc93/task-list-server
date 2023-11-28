@@ -1,8 +1,13 @@
 const fs = require('fs');
 
 //Leemos el archivo json y transformamos el contenido de string a json
+//tabla task
 const listaJson = fs.readFileSync('src/lista-tareas.json', 'utf-8');
 const listaTareas = JSON.parse(listaJson);
+
+//tabla users
+const userJson = fs.readFileSync('src/lista-usuarios.json', 'utf-8');
+const listaUsers = JSON.parse(userJson);
 
 //Agrega tarea al json
 const agregarJson = (req, res) => {
@@ -58,6 +63,8 @@ const modificaTarea = (req, res) => {
 module.exports = {
     listaTareas,
     listaJson,
+    userJson,
+    listaUsers,
     mostrarLista,
     agregarJson,
     filterCompleted,
